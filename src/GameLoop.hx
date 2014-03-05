@@ -17,6 +17,7 @@ import flash.display.BitmapData;
 import flash.display.Graphics;
 import flash.events.Event;
 import flash.events.MouseEvent;
+import flash.events.KeyboardEvent;
 
 import openfl.display.Tilesheet;
 import openfl.Assets;
@@ -51,7 +52,9 @@ class GameLoop extends Sprite
 	
    var pmanager:ParticleEmitter;
    var uiroot:Root;
-   var lifeSlider:HScroll;
+   var lifeMinSlider:HScroll;
+   var lifeMaxSlider:HScroll;
+   
    var emissionSlider:HScroll;	
    var angleSlider:HScroll;	
    var spreadSlider:HScroll;	
@@ -138,7 +141,9 @@ class GameLoop extends Sprite
     public function loadDefaults()
    {
 	      emissionSlider.pos = pmanager.FInfo.Emission;
-		lifeSlider.pos = pmanager.FInfo.Lifetime;
+		lifeMinSlider.pos = pmanager.FInfo.ParticleLifeMin;
+		lifeMaxSlider.pos = pmanager.FInfo.ParticleLifeMax;
+		
 		angleSlider.pos=pmanager.FInfo.Direction;
 		spreadSlider.pos=pmanager.FInfo.Spread ;
 		
@@ -193,10 +198,43 @@ class GameLoop extends Sprite
 		gameLoad();
 		addEventListener (MouseEvent.MOUSE_DOWN, onMouseDown);
 		stage.addEventListener (MouseEvent.MOUSE_UP, onMouseUp);
+		stage.addEventListener (KeyboardEvent.KEY_UP, onKeyUP);
   	    addEventListener( Event.ENTER_FRAME, enterFrame );
 		
 		downloader = new FileReference();	
 		trace(result);
+	}
+	public function onKeyUP(e:KeyboardEvent):Void
+	{
+		//trace(e.keyCode);1=49
+		if (e.keyCode == 49)
+		{
+			pmanager.FInfo = null;
+            pmanager.FInfo = new ParticleSystemInfo();
+			pmanager.FInfo.Fire();
+    		loadDefaults();			
+     	} else
+		if (e.keyCode == 50)
+		{
+			pmanager.FInfo = null;
+            pmanager.FInfo = new ParticleSystemInfo();
+			pmanager.FInfo.Fontain();
+    		loadDefaults();			
+     	} else
+		if (e.keyCode == 51)
+		{
+			pmanager.FInfo = null;
+            pmanager.FInfo = new ParticleSystemInfo();
+			pmanager.FInfo.Smoke();
+    		loadDefaults();			
+     	} 
+		if (e.keyCode == 52)
+		{
+			pmanager.FInfo = null;
+            pmanager.FInfo = new ParticleSystemInfo();
+			pmanager.FInfo.Snow();
+    		loadDefaults();			
+     	} 	
 	}
 	public function addedToGame(e:Event):Void
 	{
@@ -206,6 +244,7 @@ class GameLoop extends Sprite
 		addEventListener (MouseEvent.MOUSE_DOWN, onMouseDown);
 		stage.addEventListener (MouseEvent.MOUSE_UP, onMouseUp);
   	    addEventListener( Event.ENTER_FRAME, enterFrame );
+
 		
 		downloader = new FileReference();
 		
@@ -267,7 +306,12 @@ class GameLoop extends Sprite
    private function gameLoop(dt:Float):Void
    {
 	   pmanager.FInfo.Emission = Std.int( emissionSlider.pos);
-		pmanager.FInfo.Lifetime = lifeSlider.pos;
+		//pmanager.FInfo.Lifetime = lifeSlider.pos;
+		
+		 pmanager.FInfo.ParticleLifeMin = lifeMinSlider.pos;
+		pmanager.FInfo.ParticleLifeMax=lifeMaxSlider.pos;
+		
+		
 		pmanager.FInfo.Direction = angleSlider.pos;
 		pmanager.FInfo.Spread = spreadSlider.pos;
 		
@@ -333,8 +377,11 @@ class GameLoop extends Sprite
 	
 //lifetime
 
-var posy:Float = 40;
-			lifeSlider    = addHScrol(10, posy, 149, 8, -1, 50, 1, 'Life');
+            var posy:Float = 20;
+			lifeMinSlider    = addHScrol(10, posy, 149, 8, 0, 100, 0.5, 'Life min');
+			posy += 24;
+			lifeMaxSlider    = addHScrol(10, posy, 149, 8, 0, 100, 1, 'Life max');
+			
 			continuous = new CheckBox();
 			continuous.x= screenWidth-150;
 			continuous.y= screenHeight-20;
@@ -374,9 +421,9 @@ var posy:Float = 40;
 			 SpeedMax = addHScrol(9, posy, 149, h, -600, 600, 0,'SpeedMax');
 
 			   posy += 35;
-			 gravityMinSlider = addHScrol(9, posy, 149, h, -1000, 1000, 0,'Gravity Min');
+			 gravityMinSlider = addHScrol(9, posy, 149, h, -100, 100, 0,'Gravity Min');
 			   posy += 24;
-			 gravityMaxSlider = addHScrol(9, posy, 149, h,  -1000, 1000, 0,'Gravity Max');
+			 gravityMaxSlider = addHScrol(9, posy, 149, h,  -100, 100, 0,'Gravity Max');
 			 
 			 posy += 60;
 			 siseStartSlider = addHScrol(9, posy, 149, h, 0, 200, texwidth,'Size Start');
@@ -386,11 +433,11 @@ var posy:Float = 40;
 			 siseVarSlider = addHScrol(9, posy, 149, h, 0, 255, 0, 'Size Var');
 			 
 			 		 posy += 60;
-			 spinStartSlider = addHScrol(9, posy, 149, h, -50, 50,0,'Spin Start');
+			 spinStartSlider = addHScrol(9, posy, 149, h, 0, 360,0,'Spin Start');
 			 posy += 24;
-			 spinEndSlider = addHScrol(9, posy, 149, h, -50, 50, 0,'Spin End');
+			 spinEndSlider = addHScrol(9, posy, 149, h,  0, 360, 0,'Spin End');
 			 posy += 24;
-			 spinVarSlider = addHScrol(9, posy, 149, h, 0, 255, 0,'Spin Var');
+			 spinVarSlider = addHScrol(9, posy, 149, h, 0, 100, 0,'Spin Var');
 			
 			 posy += 35;
 			 radialMinSlider = addHScrol(9, posy, 149, h, -900, 900, 0,'RadialAcc Min');
@@ -477,9 +524,9 @@ but.width = 140;
 but.addEventListener(UIEvent.CLICK, function(e:UIEvent) 
 { 
 
-        spinStartSlider.pos=Util.randf(-50, 50);
-		spinEndSlider.pos  =Util.randf(-50, 50);
-		spinVarSlider.pos  = Util.randf(0, 255);
+        spinStartSlider.pos=Util.randf(0, 360);
+		spinEndSlider.pos  =Util.randf(0, 360);
+		spinVarSlider.pos  = Util.randf(0, 100);
 	
 	
 });

@@ -154,7 +154,7 @@ public static inline function setBitmapDataCK(original:String, color:Int):Bitmap
 {
 
          var image:BitmapData = getBitmap(original);
-		 replaseColorBitmapData(image, color, 0);
+		// replaseColorBitmapData(image, color, 0);
 		 return image;
 }
 

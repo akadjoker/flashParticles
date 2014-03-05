@@ -599,39 +599,96 @@ return result;
 
 		public inline function Smoke():Void
 		{
-Emission=268;
+Emission=40;
 Lifetime=-1.000;
-ParticleLifeMin=3.056;
-ParticleLifeMax=4.008;
-Direction=0.801;
-Spread=0.000;
+ParticleLifeMin=1.056;
+ParticleLifeMax=8.008;
+
+Direction = 0;
+
+Spread=0.4;
 Relative = 0;
-SpeedMin=300.000;
-SpeedMax = 300.000;
+
+SpeedMin=25;
+SpeedMax=40;
+
+
 GravityMin=0.000;
 GravityMax = 0.000;
-RadialAccelMin=14.286;
-RadialAccelMax=0.000;
-TangentialAccelMin=-14.286;
-TangentialAccelMax=0.000;
-SizeStart=2.192;
-SizeEnd=0.471;
-SizeVar=0.357;
-SpinStart=-0.159;
-SpinEnd=-0.159;
-SpinVar=0.000;
-ColorVar=0.278;
-AlphaVar=0.278;
-ColorStart.r=0.849;
-ColorStart.g=0.667;
-ColorStart.b=0.056;
-ColorStart.a=1.000;
-ColorEnd.r=0.333;
-ColorEnd.g=0.159;
-ColorEnd.b=0.786;
-ColorEnd.a=0.381;
+
+RadialAccelMin=0;
+RadialAccelMax = 0;
+
+TangentialAccelMin=0;
+TangentialAccelMax=0;
+
+SizeStart=0.192;
+SizeEnd=4.4;
+SizeVar=0.4;
+
+SpinStart=0;
+SpinEnd=0;
+SpinVar = 0;
+
+ColorVar=0.02;
+AlphaVar=0;
+ColorStart.r=0.8;
+ColorStart.g=0.8;
+ColorStart.b = 0.8;
+ColorStart.a=0.5;
+ColorEnd.r=1;
+ColorEnd.g=1;
+ColorEnd.b=1;
+ColorEnd.a=0;
 		
 		}
+	public inline function Snow():Void
+		{
+Emission=10;
+Lifetime=-1.000;
+ParticleLifeMin=3.0;
+ParticleLifeMax=5.0;
+
+Direction = 0;
+
+Spread=40;
+Relative = 0;
+
+SpeedMin=-25;
+SpeedMax=-40;
+
+
+GravityMin=5.5;
+GravityMax=10.000;
+
+RadialAccelMin=0;
+RadialAccelMax = 1;
+
+TangentialAccelMin=0;
+TangentialAccelMax=1;
+
+SizeStart=1;
+SizeEnd=0.5;
+SizeVar=0.0;
+
+SpinStart=0;
+SpinEnd=0;
+SpinVar = 0;
+
+ColorVar=0;
+AlphaVar=0;
+ColorStart.r=1;
+ColorStart.g=1;
+ColorStart.b=1;
+ColorStart.a=1;
+
+ColorEnd.r=1;
+ColorEnd.g=1;
+ColorEnd.b=1;
+ColorEnd.a=0;
+		
+		}
+		
 		public inline function Fontain():Void		
 		{
 Emission=138;

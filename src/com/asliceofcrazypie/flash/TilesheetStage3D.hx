@@ -152,7 +152,9 @@ class TilesheetStage3D extends Tilesheet
 		}
 	}
 	
-	override public function drawTiles(graphics:Graphics, tileData:Array<Float>, smooth:Bool = false, flags:Int = 0):Void 
+	override public function drawTiles(graphics:Graphics, tileData:Array<Float>, smooth:Bool = false, flags:Int = 0,count:Int = -1):Void 
+	//function drawTiles(graphics:Graphics, tileData:Array<Float>, smooth:Bool = false, flags:Int = 0, count:Int = -1):Void;
+	
 	{
 		if ( context != null && context.context3D != null && !Type.enumEq( fallbackMode, FallbackMode.FORCE_FALLBACK ) )
 		{
